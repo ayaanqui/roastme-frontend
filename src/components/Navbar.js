@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Link from 'react-router-dom/Link';
 
 const NavbarMain = () => {
   return (
@@ -24,9 +24,9 @@ const NavbarMain = () => {
             </NavDropdown>
           </Nav>
 
-          <Button variant="outline-primary" size="sm">Login</Button>
+          <Link to="/login" className="btn btn-primary btn-sm">Login</Link>
           <span className="ml-2 mr-2 text-muted">or</span>
-          <Button variant="outline-dark" size="sm">Register</Button>
+          <Link to="/register" className="btn btn-outline-dark btn-sm">Register</Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
