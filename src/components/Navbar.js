@@ -4,8 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-// import Form from 'react-bootstrap/Form';
-// import FormControl from 'react-bootstrap/FormControl';
 
 const NavbarMain = () => {
   return (
@@ -25,10 +23,7 @@ const NavbarMain = () => {
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          {/* <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-dark">Search</Button>
-            </Form> */}
+
           <Button variant="outline-primary" size="sm">Login</Button>
           <span className="ml-2 mr-2 text-muted">or</span>
           <Button variant="outline-dark" size="sm">Register</Button>
