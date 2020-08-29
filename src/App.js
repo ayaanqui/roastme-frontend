@@ -5,6 +5,17 @@ import Routes from './Routes';
 import { BrowserRouter } from 'react-router-dom';
 
 class App extends React.Component {
+  constructor(props) {
+    super();
+
+    this.state = {
+      user: {},
+      token: '',
+      loggedIn: false,
+      roasts: {},
+    };
+  }
+
   render = () => {
     return (
       <BrowserRouter>
