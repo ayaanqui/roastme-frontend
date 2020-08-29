@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import api from '../api';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Login extends React.Component {
       correctLogin: false,
       loginLoading: false,
       token: '',
+      redirect: false,
     };
   }
 
@@ -36,7 +38,8 @@ class Login extends React.Component {
           incorrectLogin: false,
           correctLogin: true,
           loginLoading: false,
-          token: res.data.token
+          token: res.data.token,
+          redirect: true
         });
       })
       .catch(err => this.setState({
@@ -81,29 +84,38 @@ class Login extends React.Component {
     }
   };
 
+  redirectIfLoggedIn = () => {
+    if (this.state.redirect)
+      return (<Redirect to="/" />);
+  };
+
   render = () => {
     return (
-      <Row className="justify-content-md-center">
-        <Col md="4">
-          <Form onSubmit={this.handleSubmit}>
-            <h2 className="mb-4">Login</h2>
+      <>
+        {this.redirectIfLoggedIn()}
 
-            {this.renderLoginInfo()}
+        < Row className="justify-content-md-center" >
+          <Col md="4">
+            <Form onSubmit={this.handleSubmit}>
+              <h2 className="mb-4">Login</h2>
 
-            <Form.Group controlId="usename">
-              <Form.Label>Username</Form.Label>
-              <Form.Control onChange={this.handleUsernameChange} type="text" placeholder="Enter username" />
-            </Form.Group>
+              {this.renderLoginInfo()}
 
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control onChange={this.handlePasswordChange} type="password" placeholder="Password" />
-            </Form.Group>
+              <Form.Group controlId="usename">
+                <Form.Label>Username</Form.Label>
+                <Form.Control onChange={this.handleUsernameChange} type="text" placeholder="Enter username" />
+              </Form.Group>
 
-            {this.renderLoginBtn()}
-          </Form>
-        </Col>
-      </Row>
+              <Form.Group controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control onChange={this.handlePasswordChange} type="password" placeholder="Password" />
+              </Form.Group>
+
+              {this.renderLoginBtn()}
+            </Form>
+          </Col>
+        </Row >
+      </>
     );
   }
 }
