@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import api from '../api';
 
@@ -10,7 +10,10 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      form: '',
+      incorrectLogin: false,
+      correctLogin: false,
+      loginLoading: false,
+      token: '',
     };
   }
 
@@ -25,19 +28,67 @@ class Login extends React.Component {
   }
 
   handleSubmit = event => {
+    this.setState({ loginLoading: true });
+
     Axios.post(api.login, { username: this.state.username, password: this.state.password })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+      .then(res => {
+        this.setState({
+          incorrectLogin: false,
+          correctLogin: true,
+          loginLoading: false,
+          token: res.data.token
+        });
+      })
+      .catch(err => this.setState({
+        incorrectLogin: true,
+        correctLogin: false,
+        loginLoading: false
+      }));
 
     event.preventDefault();
   }
 
-  render() {
+  renderLoginInfo = () => {
+    if (this.state.incorrectLogin) {
+      return (
+        <Alert variant='danger'>
+          Incorrect username or password. Please try again.
+        </Alert>
+      );
+    } else if (this.state.correctLogin) {
+      return (
+        <Alert variant='success'>
+          Awesome! You were logged in successfully.
+        </Alert>
+      );
+    }
+  };
+
+  renderLoginBtn = () => {
+    if (this.state.loginLoading) {
+      return (
+        <Button className="mt-2" variant="primary" type="submit" disabled={true}>
+          <Spinner size="sm" animation="grow" variant="light" className="mr-2" />
+          Login
+        </Button>
+      );
+    } else {
+      return (
+        <Button className="mt-2" variant="primary" type="submit">
+          Login
+        </Button>
+      );
+    }
+  };
+
+  render = () => {
     return (
       <Row className="justify-content-md-center">
         <Col md="4">
           <Form onSubmit={this.handleSubmit}>
             <h2 className="mb-4">Login</h2>
+
+            {this.renderLoginInfo()}
 
             <Form.Group controlId="usename">
               <Form.Label>Username</Form.Label>
@@ -49,9 +100,7 @@ class Login extends React.Component {
               <Form.Control onChange={this.handlePasswordChange} type="password" placeholder="Password" />
             </Form.Group>
 
-            <Button className="mt-2" variant="primary" type="submit">
-              Login
-            </Button>
+            {this.renderLoginBtn()}
           </Form>
         </Col>
       </Row>
