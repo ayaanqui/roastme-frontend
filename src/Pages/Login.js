@@ -70,14 +70,14 @@ class Login extends React.Component {
   renderLoginBtn = () => {
     if (this.state.loginLoading) {
       return (
-        <Button className="mt-2" variant="primary" type="submit" disabled={true}>
+        <Button className="mt-3" variant="primary" type="submit" disabled={true}>
           <Spinner size="sm" animation="grow" variant="light" className="mr-2" />
           Login
         </Button>
       );
     } else {
       return (
-        <Button className="mt-2" variant="primary" type="submit">
+        <Button className="mt-3" variant="primary" type="submit">
           Login
         </Button>
       );
