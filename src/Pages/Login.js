@@ -3,6 +3,7 @@ import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import api from '../api';
 import { Redirect } from 'react-router-dom';
+import SetToken from './SetToken';
 
 class Login extends React.Component {
   constructor(props) {
@@ -85,8 +86,15 @@ class Login extends React.Component {
   };
 
   redirectIfLoggedIn = () => {
-    if (this.state.redirect)
-      return (<Redirect to="/" />);
+    if (this.state.redirect) {
+      return (
+        <>
+          {/* Set token first, then redirect */}
+          <SetToken token={this.state.token} />
+          <Redirect to="/" />
+        </>
+      );
+    }
   };
 
   render = () => {
