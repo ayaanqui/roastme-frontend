@@ -3,7 +3,7 @@ import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import api from '../api';
 import { Redirect } from 'react-router-dom';
-import SetToken from './SetToken';
+import SetToken from '../components/SetToken';
 
 class Login extends React.Component {
   constructor(props) {
