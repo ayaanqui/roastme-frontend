@@ -87,6 +87,7 @@ class Login extends React.Component {
 
   redirectIfLoggedIn = () => {
     if (this.state.redirect) {
+      localStorage.setItem('token', this.state.token);
       return (
         <>
           {/* Set token first, then redirect */}
