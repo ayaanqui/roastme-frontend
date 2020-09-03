@@ -4,4 +4,6 @@ export default {
   login: `${url}/auth/login`,
   register: `${url}/auth/register`,
   roasts: `${url}/roasts/`,
+  verify: `${url}/auth/verify`,
+  getUser: `${url}/auth/user`,
 };
