@@ -1,11 +1,11 @@
-import React from './node_modules/react';
-import { Form, Row, Col, Button, Alert, Spinner } from './node_modules/react-bootstrap';
-import Axios from './node_modules/axios';
+import React from 'react';
+import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
+import Axios from 'axios';
 import api from '../api';
-import { Redirect } from './node_modules/react-router-dom';
+import { Redirect } from 'react-router-dom';
 import tokenAction from '../actions/tokenAction';
 import { loggedInAction } from '../actions/loggedInAction';
-import { connect } from './node_modules/react-redux';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
