@@ -7,6 +7,7 @@ import Axios from 'axios';
 import api from './api';
 import { connect } from 'react-redux';
 import tokenAction from './actions/tokenAction';
+import { loggedInAction } from './actions/loggedInAction';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
           if (res.data.loggedIn) {
             this.setState({ token: token, loggedIn: true, });
             this.props.tokenAction(this.state.token);
+            this.props.loggedInAction();
           }
         })
         .catch(err => { });
@@ -55,12 +57,14 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.token,
+    loggedIn: state.loggedIn,
   };
 };
 
 const mapDispatchToProps = () => {
   return {
     tokenAction,
+    loggedInAction,
   };
 };
 
