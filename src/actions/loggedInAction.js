@@ -1,7 +1,11 @@
-const loggedInAction = () => {
+export const loggedInAction = () => {
   return {
-    type: 'LOGIN',
+    type: 'LOGGED_IN',
   };
 };
 
-export default loggedInAction;
+export const loggedOutAction = () => {
+  return {
+    type: 'LOGGED_OUT',
+  };
+};
