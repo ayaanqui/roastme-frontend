@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
-import Axios from 'axios';
+import React from './node_modules/react';
+import { Link } from './node_modules/react-router-dom';
+import { Form, Row, Col, Button, Alert, Spinner } from './node_modules/react-bootstrap';
+import Axios from './node_modules/axios';
 import api from '../api';
 
 class Register extends React.Component {
