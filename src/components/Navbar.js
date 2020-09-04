@@ -1,16 +1,31 @@
 import React from 'react';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loggedOutAction } from '../actions/loggedInAction';
+import tokenAction from '../actions/tokenAction';
 
 const NavbarMain = () => {
   const loggedIn = useSelector(state => state.loggedIn);
   var rightNav;
+  const dispatch = useDispatch();
 
   if (loggedIn) {
     rightNav = (
       <>
-        <span>You are logged in!</span>
+        <Button
+          variant='secondary'
+          size='sm'
+          onClick={
+            () => {
+              dispatch(loggedOutAction());
+              dispatch(tokenAction(''));
+              localStorage.removeItem('token');
+            }
+          }
+        >
+          Logout
+        </Button>
       </>
     );
   } else {
