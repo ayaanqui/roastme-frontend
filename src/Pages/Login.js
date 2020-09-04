@@ -3,7 +3,9 @@ import { Form, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 import Axios from 'axios';
 import api from '../api';
 import { Redirect } from 'react-router-dom';
-import SetToken from '../components/SetToken';
+import tokenAction from '../actions/tokenAction';
+import { loggedInAction } from '../actions/loggedInAction';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
@@ -88,13 +90,9 @@ class Login extends React.Component {
   redirectIfLoggedIn = () => {
     if (this.state.redirect) {
       localStorage.setItem('token', this.state.token);
-      return (
-        <>
-          {/* Set token first, then redirect */}
-          <SetToken token={this.state.token} />
-          <Redirect to="/" />
-        </>
-      );
+      this.props.tokenAction(this.state.token);
+      this.props.loggedInAction();
+      return <Redirect to="/" />;
     }
   };
 
@@ -129,4 +127,18 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    token: state.token,
+    loggedIn: state.loggedIn
+  };
+};
+
+const mapDispatchToProps = () => {
+  return {
+    tokenAction,
+    loggedInAction
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(Login);
