@@ -37,7 +37,7 @@ class App extends React.Component {
             this.props.loggedInAction();
           }
         })
-        .catch(err => { });
+        .catch(err => localStorage.removeItem('token'));
     }
   }
 
