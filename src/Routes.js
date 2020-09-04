@@ -6,6 +6,7 @@ import {
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import Explore from './pages/Explore';
 
 const Routes = () => {
   return (
@@ -15,6 +16,9 @@ const Routes = () => {
       </Route>
       <Route path='/register'>
         <Register />
+      </Route>
+      <Route path='/explore'>
+        <Explore />
       </Route>
       <Route path=''>
         <Home />
