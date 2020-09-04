@@ -1,8 +1,28 @@
 import React from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const NavbarMain = () => {
+  const loggedIn = useSelector(state => state.loggedIn);
+  var rightNav;
+
+  if (loggedIn) {
+    rightNav = (
+      <>
+        <span>You are logged in!</span>
+      </>
+    );
+  } else {
+    rightNav = (
+      <>
+        <Link to="/login" className="btn btn-primary btn-sm">Login</Link>
+        <span className="ml-2 mr-2 text-muted">or</span>
+        <Link to="/register" className="btn btn-outline-dark btn-sm">Register</Link>
+      </>
+    );
+  }
+
   return (
     <Navbar bg="white" expand="md">
       <Container>
@@ -21,9 +41,7 @@ const NavbarMain = () => {
             </NavDropdown>
           </Nav>
 
-          <Link to="/login" className="btn btn-primary btn-sm">Login</Link>
-          <span className="ml-2 mr-2 text-muted">or</span>
-          <Link to="/register" className="btn btn-outline-dark btn-sm">Register</Link>
+          {rightNav}
         </Navbar.Collapse>
       </Container>
     </Navbar>
