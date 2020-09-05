@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loggedOutAction } from '../actions/loggedInAction';
 import tokenAction from '../actions/tokenAction';
+import Axios from 'axios';
+import api from '../api';
 
 const NavbarMain = () => {
   const loggedIn = useSelector(state => state.loggedIn);
+  const token = useSelector(state => state.token);
   var rightNav;
   const dispatch = useDispatch();
 
@@ -18,9 +21,13 @@ const NavbarMain = () => {
           size='sm'
           onClick={
             () => {
-              dispatch(loggedOutAction());
-              dispatch(tokenAction(''));
-              localStorage.removeItem('token');
+              Axios.post(api.logout, { token: token })
+                .then(res => {
+                  dispatch(loggedOutAction());
+                  dispatch(tokenAction(''));
+                  localStorage.removeItem('token');
+                })
+                .catch(_ => { });
             }
           }
         >
