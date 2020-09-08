@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import api from '../api';
 import { Row, Col, Card, Button } from 'react-bootstrap';
+import Roast from '../components/Roast/Roast';
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,20 +28,11 @@ class Home extends React.Component {
   render = () => {
     return (
       <>
-        <h1>Homepage</h1>
-        <br />
         <Row>
           {this.state.loaded ? this.state.roasts.map(roast => {
             return (
               <Col className="mb-4" lg="4">
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src="images/100px180.svg" />
-                  <Card.Body>
-                    <Card.Title>{roast.caption}</Card.Title>
-                    <Card.Text>Hello world this is a text</Card.Text>
-                    <Button variant="primary" size="sm">Expand</Button>
-                  </Card.Body>
-                </Card>
+                <Roast image={roast.image} />
               </Col>
             );
           }) : <h3>Loading</h3>}
