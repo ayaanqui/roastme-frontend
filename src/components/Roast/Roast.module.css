@@ -2,6 +2,31 @@
     max-width: 100%;
 }
 
-.roast > img {
+.imageHolder {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-cursor: pointer;
+}
+
+.imageHolder:hover > .imageOverlay,
+.imageHolder:focus > .imageOverlay {
+    opacity: 1;
+}
+
+.imageHolder > img {
     max-width: 100%;
+}
+
+.imageOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    top: 0px;
+    left: 0px;
+    padding: 10px 15px;
+    opacity: 0;
 }

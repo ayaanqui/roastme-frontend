@@ -5,7 +5,12 @@ import api from '../../api';
 const Roast = props => {
   return (
     <div className={styles.roast}>
-      <img src={`${api.uploads}/${props.image}`} className='rounded' />
+      <div className={styles.imageHolder}>
+        <img src={`${api.uploads}/${props.image}`} alt={props.caption} />
+        <div className={styles.imageOverlay}>
+          <div className={styles.imageCaption}>{props.caption}</div>
+        </div>
+      </div>
     </div>
   );
 };
