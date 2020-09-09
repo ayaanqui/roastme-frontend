@@ -52,8 +52,8 @@ const NavbarMain = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Trending</Nav.Link>
             <Nav.Link as={Link} to="/explore">Explore</Nav.Link>
+            <Nav.Link as={Link} to="/post">Upload</Nav.Link>
           </Nav>
 
           {rightNav}
