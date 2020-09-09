@@ -4,6 +4,7 @@ import api from '../api';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import tokenAction from '../actions/tokenAction';
+import { Redirect } from 'react-router-dom';
 
 class CreateRoast extends React.Component {
   constructor(props) {
@@ -114,34 +115,40 @@ class CreateRoast extends React.Component {
   }
 
   render = () => {
-    return (
-      <>
-        <Row className="justify-content-md-center">
-          <Col md="4">
-            <Form
-              onSubmit={this.handleSubmit}
-              encType="multipart/form-data"
-            >
-              <h2 className="mb-4">Create Roast</h2>
+    const token = localStorage.getItem('token');
 
-              {this.renderAlerts()}
+    if (!this.props.loggedIn || !token || token === '')
+      return (<Redirect to="/login" />);
+    else {
+      return (
+        <>
+          <Row className="justify-content-md-center">
+            <Col md="4">
+              <Form
+                onSubmit={this.handleSubmit}
+                encType="multipart/form-data"
+              >
+                <h2 className="mb-4">Create Roast</h2>
 
-              <Form.Group controlId="image">
-                <Form.File id="image" label="Upload your roasts" onChange={this.handleImageChange} />
-              </Form.Group>
+                {this.renderAlerts()}
 
-              <Form.Group controlId="caption">
-                <Form.Label>Caption</Form.Label>
-                <Form.Control placeholder="Caption" onChange={this.handleCaptionChange} value={this.state.caption} />
-              </Form.Group>
+                <Form.Group controlId="image">
+                  <Form.File id="image" label="Upload your roasts" onChange={this.handleImageChange} />
+                </Form.Group>
 
-              {this.renderPostButton()}
-            </Form>
-          </Col>
-        </Row>
-      </>
-    );
-  };
+                <Form.Group controlId="caption">
+                  <Form.Label>Caption</Form.Label>
+                  <Form.Control placeholder="Caption" onChange={this.handleCaptionChange} value={this.state.caption} />
+                </Form.Group>
+
+                {this.renderPostButton()}
+              </Form>
+            </Col>
+          </Row>
+        </>
+      );
+    };
+  }
 }
 
 const mapStateToProps = state => {
