@@ -4,7 +4,6 @@ import api from '../api';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import tokenAction from '../actions/tokenAction';
-import ImageUploader from 'react-images-upload';
 
 class CreateRoast extends React.Component {
   constructor(props) {
