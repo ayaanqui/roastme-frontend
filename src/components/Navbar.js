@@ -48,7 +48,7 @@ const NavbarMain = () => {
   return (
     <Navbar bg="transparent" expand="md">
       <Container>
-        <Navbar.Brand as={Link} to='/'>RoastMe</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'><span role="img" aria-label="logo">👺</span> RoastMe</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
