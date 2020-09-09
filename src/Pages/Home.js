@@ -3,6 +3,7 @@ import Axios from 'axios';
 import api from '../api';
 import Roast from '../components/Roast/Roast';
 import Masonry from 'react-masonry-css'
+import { Spinner } from 'react-bootstrap';
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,23 +32,37 @@ class Home extends React.Component {
       500: 2
     };
 
+    const loadingScreen = (
+      <div className="text-center pd-10">
+        <Spinner size="lg" animation="grow" variant="dark" />
+      </div>
+    );
+
     return (
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="masonry-grid"
-        columnClassName="masonry-grid_column"
-      >
-        {this.state.loaded ? this.state.roasts.map(roast => {
-          return (
-            <div className="mb-3">
-              <Roast
-                image={roast.image}
-                caption={roast.caption}
-              />
-            </div>
-          );
-        }) : <h3>Loading</h3>}
-      </Masonry>
+      <>
+        {
+          this.state.loaded ? null : loadingScreen
+        }
+
+        < Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="masonry-grid"
+          columnClassName="masonry-grid_column"
+        >
+          {
+            this.state.loaded ? this.state.roasts.map(roast => {
+              return (
+                <div className="mb-3">
+                  <Roast
+                    image={roast.image}
+                    caption={roast.caption}
+                  />
+                </div>
+              );
+            }) : null
+          }
+        </Masonry >
+      </>
     );
   }
 }
