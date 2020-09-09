@@ -6,8 +6,8 @@
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    cursor: pointer;
-    -webkit-cursor: pointer;
+    cursor: zoom-in;
+    -webkit-cursor: zoom-in;
 }
 
 .imageHolder:hover > .imageOverlay,
@@ -23,10 +23,18 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
     top: 0px;
     left: 0px;
     padding: 10px 15px;
     opacity: 0;
+}
+
+.imageCaption {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 3px 5px;
+    color: #ffffff;
+    border-radius: 8px;
+    width: auto;
+    display: inline-block;
 }

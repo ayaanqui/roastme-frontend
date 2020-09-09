@@ -1,8 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
 import api from '../api';
-import { Row, Col } from 'react-bootstrap';
 import Roast from '../components/Roast/Roast';
+import Masonry from 'react-masonry-css'
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,20 +27,22 @@ class Home extends React.Component {
 
   render = () => {
     return (
-      <>
-        <Row>
-          {this.state.loaded ? this.state.roasts.map(roast => {
-            return (
-              <Col className="mb-4" lg="4">
-                <Roast
-                  image={roast.image}
-                  caption={roast.caption}
-                />
-              </Col>
-            );
-          }) : <h3>Loading</h3>}
-        </Row>
-      </>
+      <Masonry
+        breakpointCols={3}
+        className="masonry-grid"
+        columnClassName="masonry-grid_column"
+      >
+        {this.state.loaded ? this.state.roasts.map(roast => {
+          return (
+            <div className="mb-3">
+              <Roast
+                image={roast.image}
+                caption={roast.caption}
+              />
+            </div>
+          );
+        }) : <h3>Loading</h3>}
+      </Masonry>
     );
   }
 }
