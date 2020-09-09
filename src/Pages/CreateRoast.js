@@ -116,8 +116,9 @@ class CreateRoast extends React.Component {
 
   render = () => {
     const token = localStorage.getItem('token');
+    const loggedIn = this.props.loggedIn;
 
-    if (!this.props.loggedIn || !token || token === '')
+    if (!loggedIn && (!token || token === ''))
       return (<Redirect to="/login" />);
     else {
       return (
