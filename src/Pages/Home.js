@@ -26,9 +26,14 @@ class Home extends React.Component {
   };
 
   render = () => {
+    const breakpointColumnsObj = {
+      default: 3,
+      500: 2
+    };
+
     return (
       <Masonry
-        breakpointCols={3}
+        breakpointCols={breakpointColumnsObj}
         className="masonry-grid"
         columnClassName="masonry-grid_column"
       >
