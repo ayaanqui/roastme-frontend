@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Spinner, Alert } from 'react-bootstrap';
 import api from '../api';
 import Axios from 'axios';
 import { connect } from 'react-redux';
@@ -13,10 +13,15 @@ class CreateRoast extends React.Component {
       selectedFile: null,
       caption: '',
       description: '',
+      loading: false,
+      success: false,
+      error: false,
     };
   }
 
   handleSubmit = event => {
+    this.setState({ loading: true });
+
     event.preventDefault();
     const token = this.props.token;
 
@@ -33,8 +38,16 @@ class CreateRoast extends React.Component {
         headers: { Authorization: `Bearer ${token}` }
       }
     )
-      .then(roast => console.log(roast))
-      .catch(err => console.log(err));
+      .then(roast => {
+        this.setState({
+          loading: false,
+          caption: '',
+          selectedFile: null,
+          success: true,
+          error: false,
+        });
+      })
+      .catch(err => this.setState({ loading: false, success: false, error: true }));
   };
 
   handleImageChange = event => this.setState({ selectedFile: event.target.files[0] });
@@ -63,6 +76,43 @@ class CreateRoast extends React.Component {
     }
   };
 
+  renderPostButton = () => {
+    if (this.state.loading) {
+      return (
+        <Button className="mt-3" variant="primary" type="submit" disabled={true}>
+          <Spinner size="sm" animation="grow" variant="light" className="mr-2" />
+          Uploading...
+        </Button>
+      );
+    } else {
+      return (
+        <Button className="mt-3" variant="primary" type="submit">
+          Upload Roast
+        </Button>
+      );
+    }
+  };
+
+  renderAlerts = () => {
+    if (this.state.error) {
+      return (
+        <Alert variant='danger'>
+          Image and caption are both required
+        </Alert>
+      );
+    }
+
+    if (this.state.success) {
+      return (
+        <Alert variant='success'>
+          Awesome! Your roast was uploaded successfully
+        </Alert>
+      );
+    }
+
+    return null;
+  }
+
   render = () => {
     return (
       <>
@@ -74,23 +124,18 @@ class CreateRoast extends React.Component {
             >
               <h2 className="mb-4">Create Roast</h2>
 
+              {this.renderAlerts()}
+
               <Form.Group controlId="image">
                 <Form.File id="image" label="Upload your roasts" onChange={this.handleImageChange} />
               </Form.Group>
 
               <Form.Group controlId="caption">
                 <Form.Label>Caption</Form.Label>
-                <Form.Control placeholder="Caption" onChange={this.handleCaptionChange} />
+                <Form.Control placeholder="Caption" onChange={this.handleCaptionChange} value={this.state.caption} />
               </Form.Group>
 
-              <Button className="mt-3" variant="primary" type="submit">
-                Post
-              </Button>
-
-              <br />
-              <br />
-
-              {this.fileData()}
+              {this.renderPostButton()}
             </Form>
           </Col>
         </Row>
