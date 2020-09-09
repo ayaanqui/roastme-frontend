@@ -6,7 +6,7 @@ const Roast = props => {
   return (
     <div className={styles.roast}>
       <div className={styles.imageHolder}>
-        <img src={`${api.uploads}/${props.image}`} alt={props.caption} />
+        <img src={`${api.uploads}/${props.image}`} alt={props.caption} loading="lazy" />
         <div className={styles.imageOverlay}>
           <div className={styles.imageCaption}>{props.caption}</div>
         </div>
