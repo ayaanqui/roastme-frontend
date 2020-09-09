@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import api from '../api';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Roast from '../components/Roast/Roast';
 
 class Home extends React.Component {
@@ -32,7 +32,10 @@ class Home extends React.Component {
           {this.state.loaded ? this.state.roasts.map(roast => {
             return (
               <Col className="mb-4" lg="4">
-                <Roast image={roast.image} />
+                <Roast
+                  image={roast.image}
+                  caption={roast.caption}
+                />
               </Col>
             );
           }) : <h3>Loading</h3>}
