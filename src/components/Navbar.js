@@ -46,7 +46,7 @@ const NavbarMain = () => {
   }
 
   return (
-    <Navbar bg="white" expand="md">
+    <Navbar bg="transparent" expand="md">
       <Container>
         <Navbar.Brand as={Link} to='/'>RoastMe</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
